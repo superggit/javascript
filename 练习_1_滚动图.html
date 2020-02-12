@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #outer{
+            width: 400px;
+            height: 450px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: blanchedalmond;
+        }     
+       
+        
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            var prev = document.getElementById("prev");
+            var next = document.getElementById("next");
+            var img = document.getElementsByTagName("img")[0];
+            var arr = ["狗.jpg" ,"猫.jpg","松鼠.jpg","熊猫.jpg","鱼.jpg"]
+            var index = 0;
+            var info = document.getElementById("info");
+            info.innerHTML = "一共"+arr.length+"页，当前是第"+(index+1)+"页";
+            
+            prev.onclick = function(){
+              index--;
+              if(index<0){
+                  index = arr.length-1;
+              }
+              img.src = arr[index];
+              info.innerHTML ="一共"+arr.length+"页，当前是第"+(index+1)+"页";
+            };
+
+            next.onclick = function(){
+                index++;
+                if(index>arr.length-1){
+                    index = 0;
+                }
+                img.src = arr[index];
+                info.innerHTML = "一共"+arr.length+"页，当前是第"+(index+1)+"页";
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="outer">
+        <img src="狗.jpg" id="img1" alt="猫" width="400px" height="400px">
+        <p id="info"></p>
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+</body>
+</html>
