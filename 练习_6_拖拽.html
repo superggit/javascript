@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box1{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+        #box2{
+            width: 100px;
+            height: 100px;
+            left: 100px;
+            top: 100px;
+            position: absolute;
+        }
+        #box3{
+            width: 100px;
+            height: 100px;
+            left: 400px;
+            top: 400px;
+            position: absolute;
+        }
+        #box4{
+            width: 100px;
+            height: 100px;
+            left: 300px;
+            top: 300px;
+            position: absolute;
+        }
+        #box5{
+            width: 100px;
+            height: 100px;
+            left: 200px;
+            top: 200px;
+            position: absolute;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            var box3 = document.getElementById("box3");
+            var box4 = document.getElementById("box4");
+            var box5 = document.getElementById("box5");
+            function fun(box1){
+                box1.onmousedown = function(e){
+                    var w = e.clientX-box1.offsetLeft;
+                    var h = e.clientY-box1.offsetTop;
+                    document.onmousemove = function(e){
+                        e = e || window.e;
+                        box1.style.left = e.clientX-w+"px";
+                        box1.style.top = e.clientY-h+"px";
+                    };
+                    document.onmouseup = function(){
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                    };
+                    return false;
+                };
+            }
+            fun(box1);
+            fun(box2);
+            fun(box3);
+            fun(box4);
+            fun(box5);
+            
+        };
+    </script>
+</head>
+<body>
+    <img id="box1" src="猫.jpg" alt="">
+    <img id="box2" src="鱼.jpg" alt="">
+    <img id="box3" src="狗.jpg" alt="">
+    <img id="box4" src="熊猫.jpg" alt="">
+    <img id="box5" src="松鼠.jpg" alt="">
+</body>
+</html>
