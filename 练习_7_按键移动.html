@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #a{
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            position: absolute;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            var a = document.getElementById("a");
+            var temp = 0;
+            var speed = 10;
+            setInterval(function(){
+                switch(temp){
+                        case 37:a.style.left = a.offsetLeft -speed+"px";break;
+                        case 38:a.style.top =a.offsetTop  -speed+"px";break;
+                        case 39:a.style.left =a.offsetLeft +speed+"px";break;
+                        case 40:a.style.top =a.offsetTop +speed+"px";break;
+                }
+            },50);
+
+            document.onkeydown = function(e){
+                e = e || window.e;
+                if(e.ctrlKey){
+                    speed = 50;
+                }else{
+                    speed = 10;
+                }
+                temp = e.keyCode;
+            };
+            document.onkeyup = function(){
+                temp = 0;
+            };
+        };
+    </script>
+</head>
+<body>
+    <div id="a"></div>
+</body>
+</html>
