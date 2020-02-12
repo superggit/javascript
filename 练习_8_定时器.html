@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box1{
+            width: 100px;
+            height: 100px;
+            top: 50px;
+            background-color: aqua;
+            position: absolute;
+        }
+        #box3{
+            width: 100px;
+            height: 100px;
+            top: 200px;
+            background-color: yellow;
+            position: absolute;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            var box1 = document.getElementById("box1");
+            var btn = document.getElementById("btn");
+            var btn1 = document.getElementById("btn1");
+            //var timer;
+
+            function fun(obj,speed,target){
+                clearInterval(obj.timer);
+                if(target == 0){
+                    speed = -speed;
+                }
+                obj.timer = setInterval(function(){
+                    var newbox = obj.offsetLeft+speed;                   
+                    if(speed>0 && newbox>800){                      
+                        newbox = 800;
+                    }else if(speed && newbox<0){
+                        newbox = 0;
+                    }
+                    obj.style.left = newbox+"px";
+                    if(newbox == target){
+                        clearInterval(obj.timer);
+                    }
+                },50);
+            }
+            //fun(box1,20);
+            btn.onclick = function(){
+                fun(box1,10,800);
+                fun(box3,5,800);
+            }; 
+            btn1.onclick = function(){
+                fun(box1,10,0);
+                fun(box3,5,800);
+            };
+
+        };
+    </script>
+</head>
+<body>
+    <button id="btn">向右移动</button>
+    <button id="btn1">向左移动</button>
+    <div id="box1"></div>
+    <div id="box3"></div>
+    <div id="box2" style="height: 800px; width: 0.5px; left: 800px; top: 0px; background-color: black; position: absolute;"></div>
+</body>
+</html>
