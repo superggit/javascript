@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        #my_menu{
+            width: 150px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            border-left: 1px solid gainsboro;
+            border-right: 1px solid gainsboro;
+            background-color: black; 
+            margin: 10px auto;
+        }
+        #my_menu div{
+            width: 150px;
+            float: left;
+        }
+        .menuSpan{
+            color: white;
+            height: 25px;
+            text-align: center;
+            background-color: black;
+            line-height: 25px;
+            display: block;
+        }
+        .collapsed{
+            height: 25px;
+            overflow: hidden;
+        }
+        #my_menu a{
+            float: left;
+            width: 150px;
+            background-color: white;
+            text-decoration: blink; 
+            border-bottom: 1px solid gray;
+        }
+        #my_menu a:hover{
+            background-color: yellowgreen;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            var menuSpan = document.getElementsByClassName("menuSpan");
+            var opendiv = menuSpan[0].parentNode;
+            for(var i=0 ;i<menuSpan.length;i++){
+                menuSpan[i].onclick = function(){
+                    var parentdiv = this.parentNode;
+                    toggle(parentdiv);
+                    
+                    if(parentdiv != opendiv){
+                        //opendiv.className += " collapsed";
+                        toggle(opendiv);
+                    }
+                    opendiv = parentdiv;
+                };
+            }
+            function toggle(obj){
+                var temp = /collapsed/;
+                var begin = obj.offsetHeight;
+                if(temp.test(obj.className)){
+                    obj.className -= " collapsed";
+                }else{
+                    obj.className += " collapsed";
+                }
+                var end = obj.offsetHeight;
+                obj.style.height = begin +"px";
+                move(obj,20,begin,end,function(){
+                    obj.style.height = "";
+                });
+            }
+
+            function move(obj,speed,begin,target,fun){
+
+                clearInterval(obj.timer);
+                if(target < begin){
+                    speed = -speed;
+                }
+                obj.timer = setInterval(function(){
+                    var newbox = obj.offsetHeight+speed;                   
+                    if((speed>0 && newbox>target) || (speed<0 && newbox<target)){                      
+                        newbox = target;
+                    }
+                    obj.style.height = newbox+"px";
+                    if(newbox == target){
+                        clearInterval(obj.timer);
+                        fun();
+                    }
+                },50);
+            }
+
+        };
+    </script>
+</head>
+<body>
+    <div id="my_menu" class="sdmenu">
+        <div>
+            <span class="menuSpan">西游记</span>
+            <a href="#">孙悟空</a>
+            <a href="#">猪八戒</a>
+            <a href="#">唐僧</a>
+            <a href="#">沙悟净</a>
+            <a href="#">白龙马</a>
+        </div>
+        <div class="collapsed">
+            <span class="menuSpan">四大名著</span>
+            <a href="#">西游记</a>
+            <a href="#">水浒传</a>
+            <a href="#">三国演义</a>
+            <a href="#">红楼梦</a>
+        </div>
+        <div class="collapsed">
+            <span class="menuSpan">四大名著</span>
+            <a href="#">西游记</a>
+            <a href="#">水浒传</a>
+            <a href="#">三国演义</a>
+            <a href="#">红楼梦</a>
+        </div>
+        <div class="collapsed">
+            <span class="menuSpan">四大名著</span>
+            <a href="#">西游记</a>
+            <a href="#">水浒传</a>
+            <a href="#">三国演义</a>
+            <a href="#">红楼梦</a>
+        </div>
+    </div>
+</body>
+</html>
